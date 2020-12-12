@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html>
   <head>
@@ -64,8 +66,7 @@
      <form class="form-signin" action="submit", method="POST"> {% csrf_token %}
         <div class="card w-100" >
            <div class="card-body">
-                <center> <img src="https://instagram.fpmw2-1.fna.fbcdn.net/v/t51.2885-15/e35/123309261_374468520459665_457756690795795178_n.jpg?_nc_ht=instagram.fpmw2-1.fna.fbcdn.net&_nc_cat=105&_nc_ohc=MFtnRLsDHXcAX8KnFOB&tp=18&oh=9de098fd99d8834b3e827819beda9863&oe=5FC8D01F"
-                     width="200" height="200" > </center>
+                <center> <img src="{% static 'images/logo.png' %}" width="200" height="200"  > </center>
                 <div class="form-group">
                     <label for="usuario"> Usuário </label>
                     <input type="text" class="form-control" id="user" name="user" placeholder="Digite seu nome de usuário" required>
@@ -83,6 +84,8 @@
                 {% endfor %}
                 <button type="submit" class="btn btn-lg btn-primary btn-block" style="color: black;font-weight: bold"> Entrar </button>
             <br>
+
+
             </div>
         </div>
      </form>
