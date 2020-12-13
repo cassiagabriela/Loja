@@ -16,7 +16,17 @@ def logout_user(request):
 
 
 def lista(request):
-    prod = Produto.objects.all
+    prod = Produto.objects.all()
+    return render(request, 'produtos.html', {'produtos': prod})
+
+
+def promocao(request):
+    promo = Produto.objects.filter(promocao=True)
+    return render(request, 'produtos.html', {'produtos': promo})
+
+
+def categorias(request, categoria):
+    prod = Produto.objects.filter(categoria=categoria)
     return render(request, 'produtos.html', {'produtos': prod})
 
 
