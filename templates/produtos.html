@@ -1,0 +1,31 @@
+{% extends 'page.html' %}
+{% load static %}
+
+{% block style %}
+    <style>
+        div.card {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        div.card {
+            padding: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% for p in produtos %}
+        <div class="col-sm-4">
+        <div class="card" style="width: 100%">
+          <img src="{{ p.imagem.url }}" style="width: 100%">
+          <div class="card-body">
+            <h5 class="card-title"> <div class="row" style="width: 100%"> <div align="left" style="width: 75%"> {{ p.titulo }}</div>  {{ p.preco }} </div> </h5>
+            <p class="card-text"> {{ p.descricao }}</p>
+        {#    <a href="#" class="btn btn-primary">Go somewhere</a>#}
+          </div>
+        </div>
+    </div>
+    {% endfor %}
+
+
+{% endblock %}

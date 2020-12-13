@@ -1,9 +1,12 @@
+<!DOCTYPE html>
 
 <html>
     <head>
         {% include "header.html" %}
+        {% block style %} {% endblock %}
     </head>
     <body>
-        {% include "fooder.html" %}
+        {% block content %} {% endblock %}
+{#        {% include "fooder.html" %}#}
     </body>
 </html>
