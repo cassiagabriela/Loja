@@ -1,0 +1,31 @@
+{% extends 'page.html' %}
+
+{% block style %}
+     <style>
+        div.container {
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+    </style>
+{% endblock %}
+{% block  content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-10 col-lg-8">
+                <div>
+                    <img src="{{ produtos.imagem.url }}" style="width: 90%">
+                </div>
+                <br>
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-4">
+                <h3>Informações: </h3>
+                <br>
+                <p><b>Titulo: </b>{{ produtos.titulo }}</p>
+                <p><b>Preço: </b>{{ produtos.preco }}</p>
+                <p><b>Descrição: </b>{{ produtos.descricao }}</p>
+                <p><b>Categoria: </b>{{ produtos.categoria }}</p>
+                <p><b>Em estoque: </b>{{ produtos.quantidade }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

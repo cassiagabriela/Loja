@@ -30,6 +30,11 @@ def categorias(request, categoria):
     return render(request, 'produtos.html', {'produtos': prod})
 
 
+def detalhes(request, id):
+    prod = Produto.objects.get(id=id)
+    return render(request, 'detalhe.html', {'produtos': prod})
+
+
 @login_required(login_url='/login')
 def index(request):
     return render(request, 'index.html')
