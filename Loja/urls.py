@@ -11,7 +11,7 @@ urlpatterns = [
     path('login/', views.login_user, name='login'),
     path('login/submit', views.submit_login, name='submit'),
     path('logout/', views.logout_user),
-    path('', views.index)
+    path('', views.index, name='index')
 ]
 
 if settings.DEBUG:
