@@ -1,0 +1,107 @@
+{% extends "page.html" %}
+
+{% block style %}
+    <style type="text/css">
+          html, body {
+             height: 100%;
+            }
+
+            .btn-primary {
+                border-color: #F1CB62;
+                background: #F1CB62;
+            }
+
+            .form-signin {
+              width: 100%;
+              max-width: 500px;
+              padding: 15px;
+              margin: auto;
+            }
+            .form-signin .checkbox {
+              font-weight: 400;
+            }
+            .form-signin .form-control {
+              position: relative;
+              box-sizing: border-box;
+              height: auto;
+              padding: 10px;
+              font-size: 16px;
+            }
+            .form-signin .form-control:focus {
+              z-index: 2;
+            }
+            .form-signin input[type="email"] {
+              margin-bottom: -1px;
+              border-bottom-right-radius: 0;
+              border-bottom-left-radius: 0;
+            }
+            .form-signin input[type="password"] {
+              margin-bottom: 10px;
+              border-top-left-radius: 0;
+              border-top-right-radius: 0;
+            }
+    </style>
+
+{% endblock %}
+{% block content %}
+    <title> Cadastro </title>
+     <form enctype="multipart/form-data" class="form-signin" action="submit", method="POST"> {% csrf_token %}
+        <div class="card w-100" >
+           <div class="card-body">
+                <p align="center"> Faça o cadastro do seu produto </p> <br>
+                <div class="form-group">
+                    <label for="text"> Titulo do produto </label>
+                    <input type="text" class="form-control" id="titulo" name="titulo" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="text">Preço</label>
+                    <input type="text" class="form-control" id="preco" name="preco" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="text">Descrição</label>
+                    <input type="text" class="form-control" id="descricao" name="descricao" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="text">Quantidade</label>
+                    <input type="text" class="form-control" id="quantidade" name="quantidade"  required>
+                </div>
+
+                <div class="form-group">
+                    <label for="text">Categoria:</label>
+                    <input type="text" class="form-control" id="categoria" name="categoria"  required>
+                </div>
+
+                <div class="form-group">
+                    <label for="text">Referencia</label>
+                    <input type="text" class="form-control" id="referencia" name="referencia"  required>
+                </div>
+
+               <div class="form-group">
+                    <label for="text">Imagem: </label>
+                    <input type="file" class="form-control" name="imagem"  id="imagem" accept="image/*">
+                </div>
+
+                <div class="form-group">
+                    Promoção: <input type="checkbox" id="descricao" name="descricao" value="sim">
+                </div>
+
+                <div class="form-group">
+                    <label for="text">Valor na promoção: </label>
+                    <input type="text" class="form-control" id="precopromocao" name="precopromocao">
+                </div>
+
+                {% for message in messages %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-lg btn-primary btn-block" style="color: black;font-weight: bold"> Cadastrar </button>
+            <br>
+
+            </div>
+        </div>
+     </form>
+{% endblock %}

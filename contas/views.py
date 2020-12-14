@@ -24,23 +24,24 @@ def set_cadastro(request):
     descricao = request.POST.get('descricao')
     referencia = request.POST.get('referencia')
     preco = request.POST.get('preco')
-    imagem = request.FILES.get('imagem')
+    imagem = request.FILES['imagem']
     quantidade = request.POST.get('quantidade')
+    categoria = request.POST.get('categoria')
     promocao = request.POST.get('promocao')
     precopromocao = request.POST.get('precopromocao')
     user = request.user
     produto = Produto.objects.create(titulo=titulo, descricao=descricao, referencia=referencia, preco=preco, imagem=imagem,
-                                     quantidade=quantidade, promocao=promocao, precopromocao=precopromocao, user=user)
+                                     quantidade=quantidade, categoria=categoria, promocao=promocao, precopromocao=precopromocao, user=user)
     url = 'detalhe/{}/'.format(produto.id)
     return redirect(url)
 
 
 def cadastro(request):
-    return render(request, 'cadastrar.html')
+    return render(request, 'cadastrar_produtos.html')
 
 
 def registro(request):
-    return render(request, 'registro.html')
+    return render(request, 'registrar_usuario.html')
 
 
 def logout_user(request):
