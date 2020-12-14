@@ -20,6 +20,7 @@ urlpatterns = [
     path('cadastrar/', views.cadastro, name='cadastro'),
     path('cadastrar/submit', views.set_cadastro, name='cadastrar'),
     path('cadastrar/detalhe/<pk>/', views.DetalhesView.as_view(), name='detalhe2'),
+    path('delete/<id>/', views.delete_produto, name='delete'),
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

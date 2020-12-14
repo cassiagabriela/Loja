@@ -36,6 +36,13 @@ def set_cadastro(request):
     return redirect(url)
 
 
+def delete_produto(request, id):
+    prod = Produto.objects.get(id=id)
+    if prod.user == request.user:
+        prod.delete()
+    return redirect('/')
+
+
 def cadastro(request):
     return render(request, 'cadastrar_produtos.html')
 

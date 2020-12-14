@@ -17,17 +17,35 @@
                 <br>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-4">
-                <h3>Informações: </h3>
-                <br>
-                <p><b>Titulo: </b>{{ produtos.titulo }}</p>
-                <p><b>Preço: </b>{{ produtos.preco }}</p>
-                <p><b>Descrição: </b>{{ produtos.descricao }}</p>
-                <p><b>Categoria: </b>{{ produtos.categoria }}</p>
-                <p><b>Em estoque: </b>{{ produtos.quantidade }}</p>
+                <b>Informações do produto: </b>
                 <br>
                 <br>
+                <b>Titulo: </b>{{ produtos.titulo }}<br>
+                <b>Preço: </b>{{ produtos.preco }}<br>
+                <b>Descrição: </b>{{ produtos.descricao }}<br>
+                <b>Categoria: </b>{{ produtos.categoria }}<br>
+                <b>Em estoque: </b>{{ produtos.quantidade }}<br>
                 <br>
-                <div class="text-end"> <a href="javascript: history.go(-1)" class="btn btn-primary"> Voltar </a> </div>
+                <br>
+                 <b>Informações do vendedor: </b>
+                <br>
+                <br>
+                <b>Nome: </b>{{ produtos.user.first_name }} <br>
+                <b>Contato: </b>{{ produtos.user.email }} <br>
+                <b>Nome de usuário: </b>{{ user.username }} <br>
+
+                <br>
+                <br>
+                <br>
+                <a href="javascript: history.go(-1)" class="btn btn-primary"> Voltar </a>
+                {% if request.user == produtos.user %}
+                    <a href="/cadastrar/{{ produtos.id }}">
+                        <button type="button" class="btn btn-primary">Alterar</button>
+                    </a>
+                    <a href="/delete/{{ produtos.id }}/">
+                        <button type="button" class="btn btn-danger" >Excluir</button>
+                    </a>
+                {% endif %}
             </div>
 
         </div>
