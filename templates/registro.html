@@ -45,21 +45,32 @@
 
 {% endblock %}
 {% block content %}
-    <title> Login </title>
-     <form class="form-signin" action="", method="POST"> {% csrf_token %}
+    <title> Registro </title>
+     <form class="form-signin" action="submit", method="POST"> {% csrf_token %}
         <div class="card w-100" >
            <div class="card-body">
-                <p align="center"> Faça seu login </p> <br>
+                <p align="center"> Faça seu cadastro </p> <br>
                 <div class="form-group">
-                    <label for="usuario"> Usuário </label>
-                    <input type="text" class="form-control" id="user" name="user" placeholder="Digite seu nome de usuário" required>
+                    <label for="usuario"> Nome </label>
+                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Digite seu nome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Email</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="Digite seu email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="senha">Usuario</label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Digite seu nome de usuario" required>
                 </div>
 
                 <div class="form-group">
                     <label for="senha">Senha</label>
                     <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite sua senha" required>
-                </div> <br>
-               <p align="center"> Não tem uma conta? <a href="registro"> Cadastra-se </a> </p>
+                </div>
+
+               <p align="center"> Já tem uma conta? <a href="login"> Faça o login </a> </p>
 
                 {% for message in messages %}
                 <div class="alert alert-danger" role="alert">

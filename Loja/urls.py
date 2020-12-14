@@ -8,13 +8,15 @@ from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls, name='admin'),
-    path('produtos/all/', views.lista, name='produtos'),
-    path('detalhe/<id>/', views.detalhes, name='detalhe'),
+    path('produtos/all/', views.ListaProdutosView.as_view(), name='produtos'),
+    path('detalhe/<pk>/', views.DetalhesView.as_view(), name='detalhe'),
     path('produtos/promocao/', views.promocao, name='promocao'),
     path('produtos/<str:categoria>/', views.categorias, name='categoria'),
-    path('login/', views.login_user, name='login'),
-    path('login/submit/', views.submit_login, name='submit'),
-    path('logout/', views.logout_user),
+    path('login/', views.LoginView.as_view(), name='login'),
+    path('logout/', views.logout_user, name='logout'),
+    path('login/registro', views.registro, name='registro'),
+    path('cadastrar/', views.cadastro, name='cadastro'),
+    path('login/submit', views.registrar),
     path('', views.lista, name='index')
 ]
 urlpatterns += staticfiles_urlpatterns()
