@@ -44,44 +44,47 @@
 
 {% endblock %}
 {% block content %}
-    <title> Cadastro </title>
-     <form enctype="multipart/form-data" class="form-signin" action="submit", method="POST"> {% csrf_token %}
+
+
+
+    <title> Alterar</title>
+     <form enctype="multipart/form-data" class="form-signin", action="{% url 'edite' produto.id %}" , method="POST"> {% csrf_token %}
         <div class="card w-100" >
            <div class="card-body">
-                <p align="center"> Faça o cadastro do seu produto </p> <br>
+                <p align="center"> Altere informações do seu produto </p> <br>
                 <div class="form-group">
                     <label for="text"> Titulo do produto </label>
-                    <input type="text" class="form-control" id="titulo" name="titulo" >
+                    <input type="text" class="form-control" id="titulo" name="titulo" value="{{ produto.titulo }}" >
                 </div>
 
                 <div class="form-group">
                     <label for="text">Preço</label>
-                    <input type="text" class="form-control" id="preco" name="preco" required>
+                    <input type="text" class="form-control" id="preco" name="preco" value="{{ produto.preco }}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="text">Descrição</label>
-                    <input type="text" class="form-control" id="descricao" name="descricao" required>
+                    <input type="text" class="form-control" id="descricao" name="descricao" value="{{ produto.descricao }}"required>
                 </div>
 
                 <div class="form-group">
                     <label for="text">Quantidade</label>
-                    <input type="text" class="form-control" id="quantidade" name="quantidade"  required>
+                    <input type="text" class="form-control" id="quantidade" name="quantidade" value="{{ produto.quantidade }}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="text">Categoria:</label>
-                    <input type="text" class="form-control" id="categoria" name="categoria"  required>
+                    <input type="text" class="form-control" id="categoria" name="categoria" value="{{ produto.categoria }}" required>
                 </div>
 
                 <div class="form-group">
                     <label for="text">Referencia</label>
-                    <input type="text" class="form-control" id="referencia" name="referencia"  required>
+                    <input type="text" class="form-control" id="referencia" name="referencia" value="{{ produto.referencia }}" required>
                 </div>
-
+                {{ form_class }}
                <div class="form-group">
-                    <label for="text">Imagem: </label>
-                    <input type="file" class="form-control" name="imagem"  id="imagem" accept="image/*">
+                   <a href="/media/{{ produto.imagem }}/"> <label for="text">Imagem: imagem já selecionada</label></a>
+                    <input type="file" class="form-control" name="imagem"  id="imagem" value="{{ produto.imagem.url }}" accept="image/*">
                 </div>
 
                 <div class="form-group">
@@ -90,7 +93,7 @@
 
                 <div class="form-group">
                     <label for="text">Valor na promoção: </label>
-                    <input type="text" class="form-control" id="precopromocao" name="precopromocao">
+                    <input type="text" class="form-control" id="precopromocao" name="precopromocao" value="{{ produto.precopromocao }}">
                 </div>
 
                 {% for message in messages %}
@@ -98,7 +101,7 @@
                     {{ message }}
                 </div>
                 {% endfor %}
-                <button type="submit" class="btn btn-lg btn-primary btn-block" style="color: black;font-weight: bold"> Cadastrar </button>
+                    <button type="submit" class="btn btn-lg btn-primary btn-block" style="color: black;font-weight: bold"> Alterar </button>
             <br>
 
             </div>

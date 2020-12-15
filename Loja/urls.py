@@ -17,10 +17,12 @@ urlpatterns = [
     path('detalhe/<pk>/', views.DetalhesView.as_view(), name='detalhe'),
     path('produtos/promocao/', views.promocao, name='promocao'),
     path('produtos/<str:categoria>/', views.categorias, name='categoria'),
-    path('cadastrar/', views.cadastro, name='cadastro'),
+    path('cadastrar/', views.cadastro_produto, name='cadastro'),
     path('cadastrar/submit', views.set_cadastro, name='cadastrar'),
     path('cadastrar/detalhe/<pk>/', views.DetalhesView.as_view(), name='detalhe2'),
     path('delete/<id>/', views.delete_produto, name='delete'),
+    path('produto/editar/<pk>', views.AtualizarProdutoView.as_view(), name='edite'),
+    path('produto/editar/submit/<id>', views.editar_submit, name='alterar'),
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

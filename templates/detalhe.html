@@ -39,7 +39,7 @@
                 <br>
                 <a href="javascript: history.go(-1)" class="btn btn-primary"> Voltar </a>
                 {% if request.user == produtos.user %}
-                    <a href="/cadastrar/{{ produtos.id }}">
+                    <a href="/produto/editar/{{ produtos.id }}">
                         <button type="button" class="btn btn-primary">Alterar</button>
                     </a>
                     <a href="/delete/{{ produtos.id }}/">

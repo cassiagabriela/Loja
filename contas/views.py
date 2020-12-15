@@ -1,11 +1,12 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,reverse
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate, login, logout
 from .models import Produto
 from django.contrib.auth.models import User
-from django.views.generic import DetailView, ListView, View
+from django.views.generic import DetailView, ListView, View, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404
 
 
 def registrar(request):
@@ -43,7 +44,99 @@ def delete_produto(request, id):
     return redirect('/')
 
 
-def cadastro(request):
+
+
+class AtualizarProdutoView(UpdateView):
+    model = Produto
+    context_object_name = 'produto'
+    template_name = 'editar_produtos.html'
+    fields = ['titulo','descricao','preco']
+
+
+    def get_success_url(self):
+        return reverse('index')
+
+
+
+
+
+# class CadastrarProdutoView(View):
+#
+#     def get(self, request, *args, **kwargs):
+#         context = {}
+#         produto = get_object_or_404(Produto, id=)
+#         context['produto'] = produto
+#         if produto.user == request.user:
+#             return render(request, 'editar_produtos.html', context)
+#
+#
+#     def post(self, request, *args, **kwargs):
+#         produto = Produto.objects.get(id=id)
+#         titulo = request.POST.get('titulo')
+#         descricao = request.POST.get('descricao')
+#         referencia = request.POST.get('referencia')
+#         preco = request.POST.get('preco')
+#         imagem = request.FILES.get('imagem')
+#         quantidade = request.POST.get('quantidade')
+#         categoria = request.POST.get('categoria')
+#         promocao = request.POST.get('promocao')
+#         precopromocao = request.POST.get('precopromocao')
+#
+#         if produto.user == request.user:
+#             produto.titulo = titulo
+#             produto.preco = preco
+#             produto.descricao = descricao
+#             produto.referencia = referencia
+#             produto.quantidade = quantidade
+#             produto.categoria = categoria
+#             produto.promocao = promocao
+#             produto.precopromocao = precopromocao
+#             if imagem:
+#                 produto.imagem = imagem
+#             produto.save()
+#             url = f'/detalhe/{produto.id}/'
+#             return redirect(url)
+#         return redirect('/')
+
+def edite_produto(request, id):
+    context = {}
+    produto = get_object_or_404(Produto, pk=id)
+    context['produto']=produto
+    if produto.user == request.user:
+      return render(request, 'editar_produtos.html',context)
+    return redirect('/')
+
+
+def editar_submit(request, id):
+
+    produto = Produto.objects.get(id=id)
+    titulo = request.POST.get('titulo')
+    descricao = request.POST.get('descricao')
+    referencia = request.POST.get('referencia')
+    preco = request.POST.get('preco')
+    imagem = request.FILES.get('imagem')
+    quantidade = request.POST.get('quantidade')
+    categoria = request.POST.get('categoria')
+    promocao = request.POST.get('promocao')
+    precopromocao = request.POST.get('precopromocao')
+
+    if produto.user == request.user:
+        produto.titulo = titulo
+        produto.preco = preco
+        produto.descricao = descricao
+        produto.referencia = referencia
+        produto.quantidade = quantidade
+        produto.categoria = categoria
+        produto.promocao = promocao
+        produto.precopromocao = precopromocao
+        if imagem:
+            produto.imagem = imagem
+        produto.save()
+        url = f'/detalhe/{produto.id}/'
+        return redirect(url)
+    return redirect('/')
+
+def cadastro_produto(request):
     return render(request, 'cadastrar_produtos.html')
 
 
@@ -77,16 +170,16 @@ def categorias(request, categoria):
     return render(request, 'produtos.html', {'produtos': prod})
 
 
+def index(request):
+    return render(request, 'index.html')
+
+
 
 class DetalhesView(LoginRequiredMixin, DetailView):
     login_url = 'login'
     model = Produto
     template_name = 'detalhe.html'
     context_object_name = 'produtos'
-
-
-def index(request):
-    return render(request, 'index.html')
 
 
 class LoginView(View):
