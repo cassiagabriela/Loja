@@ -17,7 +17,7 @@
         {% for p in produtos %}
         <div class="col-sm-4" style="padding-bottom: 10px">
         <div class="card" style="width: 100%;">
-            <a href="/detalhe/{{ p.id }}" ><img src="{{ p.imagem.url }}" style="width: 100%"></a>
+            <a href="/produto/detalhe/{{ p.id }}" ><img src="{{ p.imagem.url }}" style="width: 100%"></a>
           <div class="card-body">
             <h5 class="card-title"> <div class="row" style="width: 100%"> <div align="left" style="width: 75%"> {{ p.titulo }}</div> R$ {{ p.preco }} </div> </h5>
         {#    <a href="#" class="btn btn-primary">Go somewhere</a>#}

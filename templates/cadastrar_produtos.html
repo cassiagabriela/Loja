@@ -44,64 +44,72 @@
 
 {% endblock %}
 {% block content %}
+
+
     <title> Cadastro </title>
-     <form enctype="multipart/form-data" class="form-signin" action="submit", method="POST"> {% csrf_token %}
-        <div class="card w-100" >
-           <div class="card-body">
-                <p align="center"> Faça o cadastro do seu produto </p> <br>
-                <div class="form-group">
-                    <label for="text"> Titulo do produto </label>
-                    <input type="text" class="form-control" id="titulo" name="titulo" >
-                </div>
+{#     <form enctype="multipart/form-data" class="form-signin" , method="POST"> {% csrf_token %}#}
+{#        <div class="card w-100" >#}
+{#           <div class="card-body">#}
+{#                <p align="center"> Faça o cadastro do seu produto </p> <br>#}
+{#                <div class="form-group">#}
+{#                    <label for="text"> Titulo do produto </label>#}
+{#                    <input type="text" class="form-control" id="titulo" name="titulo" >#}
+{#                </div>#}
+{##}
+{#                <div class="form-group">#}
+{#                    <label for="text">Preço</label>#}
+{#                    <input type="text" class="form-control" id="preco" name="preco" required>#}
+{#                </div>#}
+{##}
+{#                <div class="form-group">#}
+{#                    <label for="text">Descrição</label>#}
+{#                    <input type="text" class="form-control" id="descricao" name="descricao" required>#}
+{#                </div>#}
+{##}
+{#                <div class="form-group">#}
+{#                    <label for="text">Quantidade</label>#}
+{#                    <input type="text" class="form-control" id="quantidade" name="quantidade"  required>#}
+{#                </div>#}
+{##}
+{#                <div class="form-group">#}
+{#                    <label for="text">Categoria:</label>#}
+{#                    <input type="text" class="form-control" id="categoria" name="categoria"  required>#}
+{#                </div>#}
+{##}
+{#                <div class="form-group">#}
+{#                    <label for="text">Referencia</label>#}
+{#                    <input type="text" class="form-control" id="referencia" name="referencia"  required>#}
+{#                </div>#}
+{##}
+{#               <div class="form-group">#}
+{#                    <label for="text">Imagem: </label>#}
+{#                    <input type="file" class="form-control" name="imagem"  id="imagem" accept="image/*">#}
+{#                </div>#}
+{##}
+{#                <div class="form-group">#}
+{#                    Promoção: <input type="checkbox" id="descricao" name="descricao" value="sim">#}
+{#                </div>#}
+{##}
+{#                <div class="form-group">#}
+{#                    <label for="text">Valor na promoção: </label>#}
+{#                    <input type="text" class="form-control" id="precopromocao" name="precopromocao" value="0">#}
+{#                </div>#}
+{##}
+{#                {% for message in messages %}#}
+{#                <div class="alert alert-danger" role="alert">#}
+{#                    {{ message }}#}
+{#                </div>#}
+{#                {% endfor %}#}
+{#                <button type="submit" class="btn btn-lg btn-primary btn-block" style="color: black;font-weight: bold"> Cadastrar </button>#}
+{#            <br>#}
+{##}
+{#            </div>#}
+{#        </div>#}
+{#     </form>#}
 
-                <div class="form-group">
-                    <label for="text">Preço</label>
-                    <input type="text" class="form-control" id="preco" name="preco" required>
-                </div>
+    <form method="post" enctype="multipart/form-data">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+    </form>
 
-                <div class="form-group">
-                    <label for="text">Descrição</label>
-                    <input type="text" class="form-control" id="descricao" name="descricao" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="text">Quantidade</label>
-                    <input type="text" class="form-control" id="quantidade" name="quantidade"  required>
-                </div>
-
-                <div class="form-group">
-                    <label for="text">Categoria:</label>
-                    <input type="text" class="form-control" id="categoria" name="categoria"  required>
-                </div>
-
-                <div class="form-group">
-                    <label for="text">Referencia</label>
-                    <input type="text" class="form-control" id="referencia" name="referencia"  required>
-                </div>
-
-               <div class="form-group">
-                    <label for="text">Imagem: </label>
-                    <input type="file" class="form-control" name="imagem"  id="imagem" accept="image/*">
-                </div>
-
-                <div class="form-group">
-                    Promoção: <input type="checkbox" id="descricao" name="descricao" value="sim">
-                </div>
-
-                <div class="form-group">
-                    <label for="text">Valor na promoção: </label>
-                    <input type="text" class="form-control" id="precopromocao" name="precopromocao">
-                </div>
-
-                {% for message in messages %}
-                <div class="alert alert-danger" role="alert">
-                    {{ message }}
-                </div>
-                {% endfor %}
-                <button type="submit" class="btn btn-lg btn-primary btn-block" style="color: black;font-weight: bold"> Cadastrar </button>
-            <br>
-
-            </div>
-        </div>
-     </form>
 {% endblock %}

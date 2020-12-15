@@ -4,7 +4,7 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate, login, logout
 from .models import Produto
 from django.contrib.auth.models import User
-from django.views.generic import DetailView, ListView, View, UpdateView
+from django.views.generic import DetailView, ListView, View, UpdateView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 
@@ -20,6 +20,17 @@ def registrar(request):
     return redirect('login')
 
 
+
+
+class CriaProdutoView(CreateView):
+    model = Produto
+    context_object_name = 'produtos'
+    template_name = 'cadastrar_produtos.html'
+    fields = ['titulo','descricao','preco','referencia','imagem','quantidade','categoria', 'promocao','precopromocao','user']
+
+    def get_success_url(self):
+        return reverse('index')
+
 def set_cadastro(request):
     titulo = request.POST.get('titulo')
     descricao = request.POST.get('descricao')
@@ -30,11 +41,22 @@ def set_cadastro(request):
     categoria = request.POST.get('categoria')
     promocao = request.POST.get('promocao')
     precopromocao = request.POST.get('precopromocao')
+    print(str(precopromocao))
     user = request.user
     produto = Produto.objects.create(titulo=titulo, descricao=descricao, referencia=referencia, preco=preco, imagem=imagem,
                                      quantidade=quantidade, categoria=categoria, promocao=promocao, precopromocao=precopromocao, user=user)
     url = 'detalhe/{}/'.format(produto.id)
     return redirect(url)
+
+
+class DeleteProdutoView(DeleteView):
+    model = Produto
+    context_object_name = 'produtos'
+    template_name = 'confirma_delete.html'
+
+    def get_success_url(self):
+        return reverse('index')
+
 
 
 def delete_produto(request, id):
@@ -56,85 +78,6 @@ class AtualizarProdutoView(UpdateView):
     def get_success_url(self):
         return reverse('index')
 
-
-
-
-
-# class CadastrarProdutoView(View):
-#
-#     def get(self, request, *args, **kwargs):
-#         context = {}
-#         produto = get_object_or_404(Produto, id=)
-#         context['produto'] = produto
-#         if produto.user == request.user:
-#             return render(request, 'editar_produtos.html', context)
-#
-#
-#     def post(self, request, *args, **kwargs):
-#         produto = Produto.objects.get(id=id)
-#         titulo = request.POST.get('titulo')
-#         descricao = request.POST.get('descricao')
-#         referencia = request.POST.get('referencia')
-#         preco = request.POST.get('preco')
-#         imagem = request.FILES.get('imagem')
-#         quantidade = request.POST.get('quantidade')
-#         categoria = request.POST.get('categoria')
-#         promocao = request.POST.get('promocao')
-#         precopromocao = request.POST.get('precopromocao')
-#
-#         if produto.user == request.user:
-#             produto.titulo = titulo
-#             produto.preco = preco
-#             produto.descricao = descricao
-#             produto.referencia = referencia
-#             produto.quantidade = quantidade
-#             produto.categoria = categoria
-#             produto.promocao = promocao
-#             produto.precopromocao = precopromocao
-#             if imagem:
-#                 produto.imagem = imagem
-#             produto.save()
-#             url = f'/detalhe/{produto.id}/'
-#             return redirect(url)
-#         return redirect('/')
-
-def edite_produto(request, id):
-    context = {}
-    produto = get_object_or_404(Produto, pk=id)
-    context['produto']=produto
-    if produto.user == request.user:
-      return render(request, 'editar_produtos.html',context)
-    return redirect('/')
-
-
-def editar_submit(request, id):
-
-    produto = Produto.objects.get(id=id)
-    titulo = request.POST.get('titulo')
-    descricao = request.POST.get('descricao')
-    referencia = request.POST.get('referencia')
-    preco = request.POST.get('preco')
-    imagem = request.FILES.get('imagem')
-    quantidade = request.POST.get('quantidade')
-    categoria = request.POST.get('categoria')
-    promocao = request.POST.get('promocao')
-    precopromocao = request.POST.get('precopromocao')
-
-    if produto.user == request.user:
-        produto.titulo = titulo
-        produto.preco = preco
-        produto.descricao = descricao
-        produto.referencia = referencia
-        produto.quantidade = quantidade
-        produto.categoria = categoria
-        produto.promocao = promocao
-        produto.precopromocao = precopromocao
-        if imagem:
-            produto.imagem = imagem
-        produto.save()
-        url = f'/detalhe/{produto.id}/'
-        return redirect(url)
-    return redirect('/')
 
 def cadastro_produto(request):
     return render(request, 'cadastrar_produtos.html')
@@ -167,6 +110,10 @@ def promocao(request):
 
 def categorias(request, categoria):
     prod = Produto.objects.filter(categoria=categoria)
+    return render(request, 'produtos.html', {'produtos': prod})
+
+def meusprodutos(request):
+    prod = Produto.objects.filter(user=request.user)
     return render(request, 'produtos.html', {'produtos': prod})
 
 
