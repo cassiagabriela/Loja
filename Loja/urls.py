@@ -7,22 +7,19 @@ from django.conf import settings
 from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
 
 urlpatterns = [
-    path('', views.lista, name='index'),
+    path('', views.ListaProdutosView.as_view(), name='index'),
     path('admin/', admin.site.urls, name='admin'),
     path('login/', views.LoginView.as_view(), name='login'),
     path('logout/', views.logout_user, name='logout'),
-    path('login/registro', views.registro, name='registro'),
-    path('login/submit', views.registrar),
+    path('registro/', views.registro, name='registro'),
     path('produtos/all/', views.ListaProdutosView.as_view(), name='produtos'),
     path('produtos/meus/', views.meusprodutos, name='meus'),
-    path('detalhe/<pk>/', views.DetalhesView.as_view(), name='detalhe'),
+    path('produto/detalhe/<pk>/', views.DetalhesView.as_view(), name='detalhe'),
     path('produtos/promocao/', views.promocao, name='promocao'),
     path('produtos/<str:categoria>/', views.categorias, name='categoria'),
     path('cadastrar/', views.CriaProdutoView.as_view(), name='cadastro'),
-    # path('cadastrar/submit', views.set_cadastro, name='cadastrar'),
-    path('cadastrar/detalhe/<pk>/', views.DetalhesView.as_view(), name='detalhe2'),
     path('delete/<pk>/', views.DeleteProdutoView.as_view(), name='delete'),
-    path('produto/editar/<pk>', views.AtualizarProdutoView.as_view(), name='edite'),
+    path('editar/<pk>', views.AtualizarProdutoView.as_view(), name='edite'),
 
 ]
 urlpatterns += staticfiles_urlpatterns()
