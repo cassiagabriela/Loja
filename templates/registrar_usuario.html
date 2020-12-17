@@ -46,7 +46,7 @@
 {% endblock %}
 {% block content %}
     <title> Registro </title>
-     <form class="form-signin" action="submit", method="POST"> {% csrf_token %}
+     <form class="form-signin" action="", method="POST"> {% csrf_token %}
         <div class="card w-100" >
            <div class="card-body">
                 <p align="center"> Faça seu cadastro </p> <br>
@@ -77,7 +77,7 @@
                     {{ message }}
                 </div>
                 {% endfor %}
-                <button type="submit" class="btn btn-lg btn-primary btn-block" style="color: black;font-weight: bold"> Entrar </button>
+                <button type="submit" class="btn btn-lg btn-primary btn-block" style="color: black;font-weight: bold"> Cadastrar </button>
             <br>
 
             </div>

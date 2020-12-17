@@ -72,40 +72,40 @@ class AtualizarProdutoView(LoginRequiredMixin, UpdateView):
         return reverse('index')
 
 
-def registro(request):
-    return render(request, 'registrar_usuario.html')
+class LogoutView(View):
+    def get(self, request, *args, **kwargs):
+      logout(request)
+      return redirect('/login')
 
 
-def logout_user(request):
-    logout(request)
-    return redirect('/login')
+class FilterPromocaoView(View):
+    def get(self, request, *args, **kwargs):
+      promo = Produto.objects.filter(promocao=True)
+      return render(request, 'produtos.html', {'produtos': promo})
 
 
-def promocao(request):
-    promo = Produto.objects.filter(promocao=True)
-    return render(request, 'produtos.html', {'produtos': promo})
+class FilterCategoriasView(View):
+    def get(self, request, *args, **kwargs):
+        context = super(FilterCategoriasView, self).get_context_data(**kwargs)
+        prod = Produto.objects.filter(categoria=context)
+        return render(request, 'produtos.html', {'produtos': prod})
 
 
-def categorias(request, categoria):
-    prod = Produto.objects.filter(categoria=categoria)
-    return render(request, 'produtos.html', {'produtos': prod})
+class FilterMyProductsView(View):
+    def get(self, request, *args, **kwargs):
+        prod = Produto.objects.filter(user=request.user)
+        return render(request, 'produtos.html', {'produtos': prod})
 
 
-def meusprodutos(request):
-    prod = Produto.objects.filter(user=request.user)
-    return render(request, 'produtos.html', {'produtos': prod})
+class RegistroView(View):
 
+    def get(self, request, *args, **kwargs):
+        return render(request, 'registrar_usuario.html')
 
-def index(request):
-    return render(request, 'index.html')
-
-
-def registrar(request):
-    if request.POST:
+    def post(self, request, *args, **kwargs):
         nome = request.POST.get('nome')
         username = request.POST.get('username')
         password = request.POST.get('senha')
         email = request.POST.get('email')
         User.objects.create(username=username, password=password, email=email, first_name=nome)
-
-    return redirect('login')
+        return redirect('login')
